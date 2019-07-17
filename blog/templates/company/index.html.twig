@@ -3,43 +3,35 @@
 {% block title %}Company index{% endblock %}
 
 {% block body %}
-    <h1>Company index</h1>
+    <h1>Liste des compagnies</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Title</th>
-                <th>Content</th>
-                <th>Price</th>
-                <th>Picture1</th>
-                <th>Picture2</th>
-                <th>Picture3</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for company in companies %}
-            <tr>
-                <td>{{ company.id }}</td>
-                <td>{{ company.title }}</td>
-                <td>{{ company.content }}</td>
-                <td>{{ company.price }}</td>
-                <td>{{ company.picture1 }}</td>
-                <td>{{ company.picture2 }}</td>
-                <td>{{ company.picture3 }}</td>
-                <td>
-                    <a href="{{ path('company_show', {'id': company.id}) }}">show</a>
-                    <a href="{{ path('company_edit', {'id': company.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="8">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+    <div class="container">
+        <div class="row">
+            {% for company in companies %}
+                <div class="col-3">
+                    <div class="card text-white bg-dark mb-3">
+                        <img src="{{ company.picture1 }}" alt="Card-img-top" style="width: 100%; height: auto;">
+                        <div class="card-body">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ company.title }}</h5>
+                                <p class="card-text">{{ company.content }}</p>
+                                <p class="card-text">{{ company.price }}</p>
+                                <a class="btn btn-outline-light btn-sm"
+                                   href="{{ path('company_show', {'id': company.id}) }}">show</a>
+                                <a class="btn btn-outline-light btn-sm"
+                                   href="{{ path('company_edit', {'id': company.id}) }}">edit</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <a class="btn btn-warning" href="{{ path('company_new') }}">Create new</a>
+    </div>
 
-    <a href="{{ path('company_new') }}">Create new</a>
+
+
+
+
+
 {% endblock %}
